@@ -31,6 +31,7 @@ if __name__ == "__main__":
 	data = pd.merge(data, deaths, on="Time")
 	data = pd.merge(data, cases, on="Time")
 	data = data.iloc[::4, :]
+	data = data.reset_index(drop=True)
 	new_symptomatics = np.zeros((num_steps,))
 
 	for i in range(num_steps -1, 0, -1):
@@ -41,13 +42,18 @@ if __name__ == "__main__":
 
 	data["new_symptomatics"] = pd.Series(new_symptomatics)
 	print(new_symptomatics)
+	print(data["new_symptomatics"])
 
 	np.random.seed(SEED)
 	num_tested = np.random.binomial(new_symptomatics, FRAC_TESTED)
 	num_positive = np.random.binomial(num_tested, FRAC_POSITIVE)
 	data["num_positive"] = num_positive
 	data["Day"] = data["Time"].astype("int64")
+
 	data.drop("Time", inplace=True, axis=1)
+
+	data.to_csv(os.path.join(dir_name, "processed_full.csv"), index=False)
+
 	data.drop("num_symptomatic", inplace=True, axis=1)
 	data.drop("num_cases", inplace=True, axis=1)
 
@@ -62,7 +68,7 @@ if __name__ == "__main__":
 	indexDay = data["Day"].iloc[index]
 	print(index)
 
-	data.drop(list(range(0, index*4, 4)), inplace=True, axis=0)
+	data.drop(list(range(0, index)), inplace=True, axis=0)
 	data["Day"] = data["Day"] - indexDay + 1
 
 
