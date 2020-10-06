@@ -127,3 +127,5 @@ if __name__ == "__main__":
 
 	data = data[["Day", "num_positive", "num_tested", "num_hospitalised", "num_cumulative_hospitalizations", "num_critical", "num_fatalities"]]
 	data.to_csv(os.path.join(dir_name, "processed.csv"), index=False)
+	data = data[["Day", "num_positive", "num_hospitalised", "num_cumulative_hospitalizations", "num_critical", "num_fatalities"]]
+	data.to_csv(os.path.join(dir_name, "processed_no_tested.csv"), index=False)
