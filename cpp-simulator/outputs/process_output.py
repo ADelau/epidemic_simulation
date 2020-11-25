@@ -22,6 +22,8 @@ if __name__ == "__main__":
 	critical = pd.read_csv(os.path.join(dir_name, "num_critical.csv"))
 	deaths = pd.read_csv(os.path.join(dir_name, "num_fatalities.csv"))
 	cases = pd.read_csv(os.path.join(dir_name, "num_cases.csv"))
+	cum_infective = pd.read_csv(os.path.join(dir_name, "num_cumulative_infective.csv"))
+	num_infected = pd.read_csv(os.path.join(dir_name, "num_infected.csv"))
 
 	num_steps = math.ceil(cases["Time"].iloc[-1])
 
@@ -30,6 +32,8 @@ if __name__ == "__main__":
 	data = pd.merge(data, critical, on="Time")
 	data = pd.merge(data, deaths, on="Time")
 	data = pd.merge(data, cases, on="Time")
+	data = pd.merge(data, cum_infective, on="Time")
+	data = pd.merge(data, num_infected, on="Time")
 	data = data.iloc[::4, :]
 	data = data.reset_index(drop=True)
 	data["num_cases"] = data["num_cases"].astype(int)
