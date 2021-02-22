@@ -1,3 +1,6 @@
+# Credits
+This code is mostly reproduced from https://github.com/cni-iisc/epidemic-simulator and is intended to educational purposes.
+
 # City-Scale epidemic simulator
 
 This repository houses the source code of the city-scale epidemic simulator developed by a team of researchers of IISc Bangalore, and TIFR Mumbai, developed to model the spread of CovID-19 in Indian demographics. This README document will help you familiarize yourself with the directory structure of the project and also provides the steps to run the simulator on your local machines. 
